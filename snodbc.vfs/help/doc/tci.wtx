@@ -1,0 +1,67 @@
+Getting Tables, Columns and Other Metadata
+
+The application should follow ((mdbinding metadata binding recommendations)) if it's intended to be portable between different ODBC versions.
+
+==== Command: ==
+  ** !!$conn!! tables ?!!pattern!!? ?!!options!!? **
+
+==== Returns: ==
+The result set as a list of lists, describing tables with the names matching the given pattern. The pattern matching is done by the data source, using the same rules as in LIKE statement.
+
+The following options may be given to narrow the result set:
+  * -catalog catalogName
+  * -schema schemaName
+  * -type typeName
+
+==== Command: ==
+  ** !!$conn!! columns ?!!pattern!!? ?!!options!!? **
+
+==== Returns: ==
+The result set as a list of lists, describing columns in the tables matching the pattern (or all tables if the pattern is not given).
+
+See the description of **tables** method above for the list of supported options.
+
+==== Command: ==
+  ** !!$conn!! indexes !!tableName!! ?!!options!!? **
+
+==== Returns: ==
+The result set as a list of lists, describing indexes on the given table. Use -catalog and -schema options as needed to describe the table. Give "**-unique 1**" if you want to retrieve only unique indexes.
+
+==== Command: ==
+  ** !!$conn!! typeinfo !!type!! **
+
+==== Returns: ==
+The result set as a list of lists, describing the datasource-specific data types corresponding to the given ODBC predefined type. The result set may be empty if there is no appropriate type in the data source. 
+
+==== Command: ==
+  ** !!$conn!! rowid !!table!! !!?options?!! **
+
+==== Returns: ==
+The result set as a list of lists, describing the columns of the table that are the best for identifying a particular row in the table, e.g. for subsequent UPDATE query. Use -catalog and -schema options to identify the table if needed.
+
+Other options are:
+
+  * -scope (one of: row, transaction, session) determines what validity period is required for the row identifier;
+  * -nullable (boolean, defaults to true) determines whether the row identifier may include columns that may be NULL; use -nullable false only if absolutely sure, because some drivers don't support it and will return empty result set.
+
+==== Command: ==
+  ** !!$conn!! primarykeys !!table!! !!?options?!! **
+
+==== Returns: ==
+The result set as a list of lists, describing the columns of the table that are included in its primary key. Use -catalog and -schema options to identify the table if needed.
+
+==== Command: ==
+  ** !!$conn!! procedures !!pattern!! !!?options?!! **
+
+==== Returns: ==
+The result set as a list of lists, describing the stored procedures available in the database. Use -catalog and -schema options if needed to specify where to look for stored procedures.
+
+==== Command: ==
+  ** !!$conn!! procedurecolumns !!pattern!! !!?options?!! **
+
+==== Returns: ==
+The result set as a list of lists, describing the stored procedures available in the database. Use -catalog and -schema options if needed to specify where to look for stored procedures. Use -column option to get information about one particular column.
+
+
+For each of these methods, the ((statement)) object may be created: just give the method name instead of SQL clause when creating the statement.
+

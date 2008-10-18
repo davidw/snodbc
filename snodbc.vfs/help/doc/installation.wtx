@@ -1,0 +1,5 @@
+Installation
+To install the extension, copy snodbc.kit to whatever place you want. To uninstall the extension, delete snodbc.kit from that place.
+
+Well, if this package doesn't contains precompiled extensions for your platform, the process may be a little more complicated. Please see the ((portability)) page for more details.
+

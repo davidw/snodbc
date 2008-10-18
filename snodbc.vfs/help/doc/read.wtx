@@ -1,0 +1,12 @@
+Reading Result Set to Array
+==== Commands: ==
+  ** !!$conn!! read !!arraySpec!! !!sql-clause!! !!?argtypedefs?!! !!?arglist?!! **
+  ** !!$statement!! read !!arraySpec!! !!?arglist?!! **
+
+These methods are similar to the ((exec run)) method, except that they store the result set in the array or arrays given in arraySpec argument.
+
+Citing ((TclODBC)) documentation:
+//The array may be specified in two ways. The first way is to specify a list of array names which are used for array names for each data column. Thus, the count of given names must be equal to the count of returned data columns (minus the first column containing the key).//
+
+//The second way is to specify only a single arrayname, which is used as two-dimensional array. The array index in this case is constructed from the key column value and column label, separated by comma.//
+

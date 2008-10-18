@@ -1,0 +1,21 @@
+Fetching Result Set
+The advantage of the ((statement)) object is that the result set may be fetched row-by-row, without need to store the whole result in memory.
+
+==== Commands: ==
+  ** !!$stmtName!! execute ?!!arglist!!? **
+  ** !!$stmtName!! fetch ?!!arrayName!!? ?!!columnNames!!? **
+
+The **execute** method runs the query but doesn't return a whole result set. The rows contained in the result set may be retrieved with **fetch** method.
+
+The simpliest form of the **fetch** method, without any arguments, returns a list of values for a new row, or the empty string when the data set is exhausted.
+
+With the presence of !!arrayName!! argument, **fetch** method stores the row in the given array. Statement column labels are used as indexes; you may also give a list of indexes as the last argument. When the array name is given, the method returns a boolean value indicating whether the row was fetched. 
+
+Some databases and drivers support multiple result sets returned for a single query. This functionality is disabled by default; use ((connect -multisets connection option)) to enable it.
+
+==== Commands: ==
+  ** !!$stmtName!! moreresults **
+
+Goes to the next result set for the last executed query. Returns !!true!! if the next result set is available and !!false!! otherwise.
+
+Each result set may contain its own ((statement row count)) and generate its own ((lastmessages diagnostic messages)).

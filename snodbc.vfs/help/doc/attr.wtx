@@ -1,0 +1,31 @@
+Connection Attributes
+==== Commands: ==
+  **!!$conn!! set !!attribute!! !!value!!**
+  **!!$conn!! get !!attribute!!**
+  **!!$stmtName!! set !!attribute!! !!value!!**
+  **!!$stmtName!! get !!attribute!!**
+
+==== Arguments: ==
+!!attribute!! may be one of the following ODBC attributes:
+    * **concurrency** (set to: readonly, lock, rowver, values)
+    * **cursortype** (set to: forwardonly, keyset, dynamic, static)
+    * **autocommit** (set to: 0 or 1)
+    * **maxrows** (integer)
+    * **timeout** (integer, in seconds)
+    * **maxlength** (integer)
+    * **multisets** (set to: 0 or 1)
+    * **rowsetsize** (integer)
+    * **noscan** (set to: 0 or 1)
+
+Please read ODBC API documentation for detailed explanations of these attributes and their values.
+
+SnODBC also defines its own attributes:
+
+    * **encoding**: string encoding for non-unicode function calls, query parameters and results. Defaults to system encoding.
+    * **null**: the output representation of NULL values. The empty string is the default, but it will prevent the application from distinguishing NULL values from empty ones.
+  
+==== Returns: ==
+New attribute's value. If the driver refuses to set the attribute, error message is generated. The driver may also decide to set the attribute to another value than requested; the application may examine the return value from the **set** method to detect it.
+
+The get/set methods are defined both for ((connect connection)) and ((statement)) objects. All changes in SnODBC attributes of a connection are propagated to all existing statements created from that connection. The behavior of ODBC attributes is defined by the standard and may differ.
+

@@ -1,0 +1,34 @@
+Differences with TclODBC
+
+=== Data types ==
+SnODBC supports Unicode strings (WVARCHAR, WCHAR) both in parameters and in result sets. It always tries to bind a string parameter using Unicode type, and falls back to system or database encoding only if failed with Unicode. Result set columns are retrieved using the types provided by the data source, whether it is Unicode or not.
+
+When the parameter types are autodetected, SnODBC uses LONGVARCHAR / WLONGVARCHAR data type for binding a parameter which length is greater than 255.
+
+=== ODBC 3.0/2.0 differences ==
+SnODBC uses ODBC 3.0 functions, so your application will be treated as an ODBC 3.0 one.If your application interprets numeric SQL data type identifiers contained in various metadata result sets, it may have to be adapted for ODBC 3.0 identifiers of **date and time** data types.
+
+Metadata result sets, returned by **columns**, **indexes**, **tables** and **typeinfo** queries, are also different (more columns, some of them were renamed) for ODBC 3.0.
+
+=== Connection object ==
+
+When you use the **run** method to execute queries, SnODBC remembers compiled statement objects for last 10 queries. When you run the query with the same source and the same argument types as one of the saved queries, the precompiled statement for that query is used. So you don't have to create separate statement objects explicitly if your script uses no more than 10 different queries - the performance will be good enough with the **run** method of the connection.
+
+The set of ((tci metadata-querying methods)) is extended with **primarykeys**, **rowid**, **procedures** and **procedurecolumns**. For all these methods, -schema and -catalog options are supported; make use of them if they are required to identify the table.
+
+=== Statement object ==
+SnODBC's statement object is (or should be) similar to the TclODBC's one. The only difference is that you may set the encoding for non-Unicode strings for each statement individually.
+
+Unlike TclODBC, all statement objects are deleted immediately when the connection is closed.
+
+=== Return values ==
+The **execute** method of the statement object returns the number of result set columns instead of "OK". If you want to know whether the query succeeded, catch the errors.
+
+=== Eval method ==
+The **eval** method accepts a //command prefix// instead of a procedure: you may pass a procedure name with some initial arguments. This creates a potential incompatibility if you have used a procedure name containing spaces with TclODBC. 
+
+=== Driver manager prompt ==
+SnODBC can make the driver manager prompt the user for connection parameters. Read ((prompt this section)) for the detailed description of necessary commands and options.
+
+=== Scrollable cursors ==
+SnODBC is able to ((scroll)) any scrollable result sets in all directions supported by the driver.

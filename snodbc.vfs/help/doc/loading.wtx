@@ -1,0 +1,8 @@
+Loading the Package
+You need a TCL interpreter supporting starkits to make SnODBC available to your application.
+
+Then you may load the package with two commands:
+  **source snodbc.kit**
+  **package require snodbc**
+
+The package creates the **database** command in the global namespace, to be compatible with ((TclODBC)). If you don't want the command to be in the global namespace, just delete it and use its original name, **::odbc::database**.

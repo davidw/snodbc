@@ -1,0 +1,19 @@
+Configuring snodbc extension as a whole
+==== Commands: ==
+  **database extension preferpackage unixodbc**
+  **database extension preferpackage iODBC**
+
+On UNIX-like systems snodbc chooses one of the two popular ODBC libraries to work with: either unixodbc or iODBC. These commands determine which of the packages is tried first (the other package is still tried when the default one is unavailable). This setting defaults to unixodbc, because it gives more usable information on ((dsns datasources and drivers)).
+
+On Windows these settings are currently ignored.
+
+==== Commands: ==
+  **database extension datatype !!name!! !!numeric-code!! !!WCHAR|CHAR|BINARY!!**
+Registers a new data type. 
+
+Sometimes a particular driver provides a non-standard datatype which is not known to SnODBC. This command makes using such types more convenient; also it's the only way to designate a type as convertible to/from SQL_C_BINARY.
+
+==== Example: ==
+  ;# it is the real-world example for DB2 version 9.1 and above
+  database extension datatype XML -370 Binary
+

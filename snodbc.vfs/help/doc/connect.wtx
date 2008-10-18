@@ -1,0 +1,35 @@
+Connecting with a Data Source
+==== Command: ==
+  **database connect !!commandName!! !!connectionString!! ?!!options!!?**
+  **database !!commandName!! !!connectionString!! ?!!options!!?**
+  **database connect !!commandName!! !!dataSourceName!! !!userName!! !!password!! ?!!options!!?**
+  **database !!commandName!! !!dataSourceName!! !!userName!! !!password!! ?!!options!!?**
+
+==== Options: ==
+  **-encoding** sets a character encoding for non-unicode strings (it defaults to the system encoding). 
+
+  **-null** sets a NULL representation for results and parameters. Note that empty string parameters are never passed as NULLs, even if -null is the empty string.
+    If you have to work with NULLs in non-trivial ways, it's recommended to use [::odbc::NULL] return value for this option. ::odbc::NULL returns an invalid unicode string, thus lowering chanced that some data will be confused with NULLs.
+
+  **-default** sets a DEFAULT representation for parameters. When such parameter is passed to a stored procedure, the default value from a procedure definition is used instead.
+
+  **-preparedsqlcachesize** sets a number of prepared statements kept in the cache for the queries ((exec runned)) using this database object, i.e. without explicitly created ((statement)) objects. It defaults to 0, which disables prepared statement cache entirely.
+
+  **-multisets** enables multiple result sets for the connection. SnODBC also supports ((tclodbc))-compatible **multisets** subcommand on a connection object, but it is unusable if a driver requires this option to be set **before** connecting (as seen on FreeTDS).
+
+  **Any ((attr attribute name)), prefixed with a dash** sets the respective connection attribute before connecting. Use it when the driver doesn't allow changing the attribute with the ((attr set)) subcommand after the connection is established.
+
+==== Returns: ==
+Fully-qualified !!commandName!! that represents a //connection// object. We will refer to this value as !!$conn!! when describing connection methods.
+
+==== Errors: ==
+When it's impossible to connect, error message is returned and the command is not created.
+
+==== Example: ==
+  database connect nw DSN=northwind 
+  nw disconnect
+
+The **disconnect** method closes the connection and destroys the connection command.
+
+==== Warning: ==
+It's strongly recommended to use **connect** keyword in such statements. Other forms are preserved for ((tclodbc)) compatibility, but they may be dropped in the future.

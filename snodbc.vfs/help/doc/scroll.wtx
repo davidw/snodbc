@@ -1,0 +1,12 @@
+Scrollable Cursors
+Some ODBC drivers support scrollable cursors. When ((fetch fetching)) rows one-by-one from a scrollable cursor, the application may return to the previous row, go to the last row, set the absolute position of the cursor at any time.
+
+SnODBC provides binding for SQLFetchScroll ODBC function to make this capability accessible from TCL.
+
+==== Commands: ==
+  ** !!$stmtName!! scroll !!direction!! ?!!offset!!? ?!!arrayName!!? ?!!columnNames!!? **
+The **scroll** method of a statement object is similar to the **((fetch))** method with respect to the last two arguments; however, it introduces !!direction!! and !!offset!! arguments to specify the desired cursor position.
+
+The !!direction!! argument may be one of the following:
+  * **first**, **last**, **next** or **prior**: positions on the first, last, next, or the previous row in the result set; !!offset!! is ignored;
+  * **absolute** or **relative**: makes use of !!offset!! to determine the desired position as !!offset!! rows away from the start of the result set (absolute) or from the last fetched row (relative). 

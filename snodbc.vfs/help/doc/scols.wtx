@@ -1,0 +1,22 @@
+Statement Columns Metadata
+It's often desirable to get some information about the result set columns, such as their names and data types. Statement object provides an easy way of querying these metadata:
+
+==== Commands: ==
+  ** !!$stmtName!! columns !!?attribute?!! !!?attribute?!! ... **
+
+==== Returns: ==
+This method returns a list of lists containing the requested attributes for each columnof the result set. The default attribute to query is columnname.
+
+Each attribute may be one of the following keywords:
+  * columnname - the column's name in the result set.
+  * name - the name of the column in its source table, if available;
+  * label - the column's label for displaying the result set on the screen;
+  * displaysize - the column's display size;
+  * type - the data type of the column, returned as numeric value; one of the predefined ODBC data types;
+  * typename - the datasource-specific name of the column's data type;
+  * scale, precision - the properties of the data type; 
+  * updatable - whether the column may be updated;
+  * tablename - the name of the column's source table, if available;
+  * qualifiername - the qualifier of the source table;
+  * owner - the owner (schema) name of the source table;
+

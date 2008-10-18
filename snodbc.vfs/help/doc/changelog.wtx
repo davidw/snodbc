@@ -1,0 +1,53 @@
+ChangeLog
+==== 2008-May-23: Improvements of the day: ==
+  * Bugfix: database instance subcommand return value was blocked by tclodbc compatibility layer.
+
+==== 2008-May-22: Improvements of the day: ==
+  * Improved ((tclodbc)) compatibility - support [$statement $argList], [$db eval $argList] forms
+  * Bugfix: output parameters were not working for [read] and [eval] subcommands
+
+==== 2008-May-21: Improvements of the day: ==
+  * Full TCL8.5/8.4 compatibility 
+  * Output parameters support
+  * New database subcommand: ((extension)) 
+  * Diagnostic message retrieval using ((lastmessages))
+  * database configure subcommand now works again
+  * Don't leak buffers in allocated statements
+  * Default to SQLExecDirect when no explicit prepared statement is requested
+  * Data type names are case-insensitive now
+  * Enable NULL input parameters
+
+==== 2007-Nov-09: Improvements of the day: ==
+  * Fixed: odbc::obj package version is now 1.1
+
+==== 2006-Apr-13: Improvements of the day: ==
+  * Fixed: passing empty varchar parameters now works (thank ((http://wiki.tcl.tk/snichols snichols)))
+  * Added: automatic fallback from explicitly-given UNICODE varchar types to non-unicode ones.
+
+==== 2005-Nov-02: Improvements of the day: ==
+  * Fixed: ((tclodbc))-compatibility wrapper was blocking "datasources" and "drivers" subcommands from working properly.
+
+==== 2005-Sep-16: Improvements of the day: ==
+  * Added: ((tci procedures and procedurecolumns)) methods
+  * Added: ((tclodbc))-compatible way of running SQL clauses without explicit method naming. 
+  * Added: ((tclodbc))-compatible specification of a datasource name without UID/PWD.
+  * Removed: Documentation for ((tclodbc)) differences that don't present any more. 
+  * Documented: ((transact Transactions)), ((mdbinding Metadata binding)) recommendations.
+
+==== 2005-Sep-12: Improvements of the day: ==
+  * Added: support for ((scroll scrollable cursors))
+  * Added: ((tci primarykeys and rowid)) methods
+  * Added: database configure, as in ((tclodbc)): supported but undocumented.
+  * Bugfix: ((attr set)) methods were using lassign's return, that is not supported by lassign implementations provided by tclkits.
+
+==== 2005-Sep-10: Improvements of the day: ==
+  * Added: -apart auto for ((prompt))-enable connection 
+  * Changed: ((scols statement columns)) attribute defaults to columnname
+
+==== 2005-Sep-09: Improvements of the day: ==
+  * Fixed: error handling when creating a connection;
+  * Added: ability to use a ((prompt driver manager GUI)) (works on MS Windows).
+  * Added: -apart option for creating DM GUI from a separate thread.
+  * Added: now the ((prompt)) options don't require the //driver// keyword
+
+==== 2005-Sep-09: Initial release, set version number to 1.1 ==

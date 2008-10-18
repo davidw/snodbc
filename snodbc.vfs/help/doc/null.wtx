@@ -1,0 +1,8 @@
+Setting NULL representation
+==== Commands: ==
+  **!!$stmtName!! set null !!string!!**
+
+These command sets a string representation for NULL values returned by the statement, in order to distinguish NULLs from empty strings.
+
+
+

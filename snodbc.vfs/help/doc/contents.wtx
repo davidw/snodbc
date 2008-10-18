@@ -1,0 +1,33 @@
+Table of Contents
+  {{listbullet 0 bc.gif 0.open bo.gif 1 p.gif 1.open bo.gif 2 p.gif}}
+  * General questions
+    * ((what What is SnODBC))
+    * ((why Why Use It))
+    * ((where Where to Get It))
+    * ((portability Portability))
+    * ((tclodbc Differences with TclODBC))
+  * ((installation Installation))
+  * Tutorial
+    * ((loading Loading the Package))
+    * ((dsns Listing Data Sources and Drivers))
+    * ((connect Connecting))
+      * ((attr Attributes))
+    * ((exec Running Queries))
+    * ((statement Statement Objects))
+      * ((fetch Fetching Result Set))
+      * ((scols Columns Metadata))
+    * ((tci Database Metadata))
+  * Advanced Topics
+    * ((eval Passing Rows to a Callback Command))
+    * ((read Reading the Result Set to Array))
+    * ((scroll Scrolling the Result Set))
+    * ((prompt Using Driver Manager GUI to Select Data Source))
+    * ((null Setting NULL representation))
+    * ((transact Transactions))
+    * ((mdbinding Portable Way to Work with Metadata))
+  * Licensing & Support
+    * ((Copying))
+    * ((donate Donations and Contributions))
+    * ((commsupp Commercial Support))
+  * ((ChangeLog))
+

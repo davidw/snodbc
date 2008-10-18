@@ -1,0 +1,28 @@
+Running Queries
+==== Commands: ==
+  **!!$conn!! run !!sql-clause!! !!?argtypedefs?!! !!?arglist?!!**
+
+==== Arguments: ==
+!!sql-clause!! is a string containing a SQL query. 
+
+!!argtypedefs!! is a list of SQL or numeric parameter types for the query. Any SQL clause may contain parameter markers (usually question marks). These markers are associated with the elements of !!argtypedefs!! and !!arglist!! from left to right.
+
+Each parameter type is a list with the following elements:
+  * optional keyword: INPUT, INPUTOUTPUT or OUTPUT. For INPUTOUTPUT and OUTPUT parameters the caller is required to pass a variable name in !!arglist!! instead of a value. **Please always specify precision for such parameters**.
+  * type name or number - one of the predefined SQL data types;
+  * scale - usually the number of decimal digits of the fractional part for numeric parameter type, 0 for all other types;
+  * precision - the field's length in characters. 
+All elements of the !!argtypedefs!! are optional. SnODBC lets the driver detect types for the parameters of unspecified types; if the driver doesn't support autodetection, SnODBC selects reasonable default for the type: one of the VARCHAR variants.
+
+!!argtypedefs!! may be the empty list; then the parameter types are autodetected.
+
+!!arglist!! is a list of argument values. Note that all parameter values are always given as one command argument, not as multiple arguments.
+
+==== Returns: ==
+Result set as a list of lists. The outer list elements are rows; each row is represented by a list of values for each column.
+
+The special case is when the result set contains one column: flat list of values is returned in this case.
+
+Another special case is when the query doesn't return a result set but performs an UPDATE, DELETE, INSERT or other data manipulation. The number of affected rows is returned in this case.
+
+

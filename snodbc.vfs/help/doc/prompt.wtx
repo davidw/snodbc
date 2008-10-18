@@ -1,0 +1,33 @@
+Using Driver Manager GUI to Select Data Source
+
+Microsoft ODBC implementation for MS Windows is able to prompt the user for the connection details and even for the driver type itself. Some UNIX implementation might have this capability as well.
+
+This section explains how to use this feature with SnODBC.
+
+First, you will need some Tk toplevel window - it may even be hidden, but it must exist. This window will be the parent window of the dialog that the driver manager will create.
+
+Now you are able to bring up the driver manager GUI so the user may select a data source:
+
+  ** database !!myDbCmd!! ? **
+  ** database !!myDbCmd!! driver {} -window . -prompt all **
+  ** database !!myDbCmd!! driver {DSN=myDSN} -window . -prompt complete **
+
+The first command, with ? instead of a connection string, is a convenient shorthand to be used in simple cases. It implies currently-focused toplevel window or **.** as a parent window and it will ask the user for all needed information to make a connection.
+
+The full form, as in the last example, uses the **driver** keyword followed by some incoming connection string that will be used to set up the GUI's initial state. After these arguments you may specify **-window** and **-prompt** options.
+
+**-window** determines a parent window for the dialog, and **-prompt** determines what information will be asked and when:
+  ** -prompt all** will ask for user input in any case;
+  ** -prompt complete** will ask for user input only if some parameters are not set in the incoming connection string;
+  ** -prompt required** will ask for user input only if some required parameters are not set in the incoming connection string, so the connection may not be established.
+  ** -prompt none** will disable prompting, which is the default.
+
+After the connection was established, you may want to retrieve a full connection string that includes the parameters specified by the user:
+
+  ** !!myDbCmd!! get connectionstring **
+
+If the user chooses to cancel the connection, the error is returned, and the error message is cancelled.
+
+For threaded environments, like ((http://wiki.tcl.tk/dqkit dqkit)), there is an additional, highly-experimental **-apart** option. It accepts boolean value and, when trueis given, creates a separate thread that will be responsible for calling the driver manager GUI. It provides a workaround for Tk / ODBC DM GUI misfeature on MS Windows: without the **-apart** option Tk windows are not repainted when exposed (e.g. when you move the driver manager's window).
+
+Using **-apart auto** implies **-apart true** if the TCL build is a threaded one and the Thread package is available.

@@ -1,0 +1,5 @@
+What is SnODBC
+**SnODBC** is an extension for the ((http://www.tcl.tk TCL)) programming language, providing a script-level binding for the ODBC interface. It is designed to be a drop-in replacement for TclODBC; however, there are ((tclodbc some differences)).
+
+SnODBC uses Ffidl for low-level ODBC calls and SNIT for high-level object-oriented API.
+

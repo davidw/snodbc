@@ -1,0 +1,10 @@
+Metadata Binding
+The application using ((tci metadata)) result sets should follow a simple convention to be portable among different versions of ODBC standard and different ODBC drivers.
+
+==== Bind by Column Number, not by Name ==
+Column names for metadata result sets, as required by ODBC specification, are sometimes changed between ODBC versions.  However, the meaning of the column with the same number is usually almost the same: e. g. we've never seen an application that wanted to distinguish between ODBC 2.0 //owner// and ODBC 3.0 //schema//.
+
+==== Access Driver-specific Columns by Counting Down from the Last One ==
+For each metadata result set, the driver may provide additional columns containing driver-specific information. If the application makes use of this feature for a particular driver, it must use offsets relative to the last column of the result set to access driver-specific columns.
+
+

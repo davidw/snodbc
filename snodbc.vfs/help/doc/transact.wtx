@@ -1,0 +1,10 @@
+Transactions
+==== Commands: ==
+  **!!$conn!! set autocommit !!on/off!!**
+  **!!$conn!! commit**
+  **!!$conn!! rollback**
+
+These commands provide support for SQL transactions. By default, each SQL statement is run in a separate transaction, and all changes are immediately committed to the database. However, this behavior may be altered by setting the **autocommit** option to false.
+
+When **autocommit** is **off**, the transaction won't be closed until either **commit** or **rollback** method is called. 
+

@@ -1,0 +1,30 @@
+Listing Data Sources and Drivers
+=== Listing Data Sources ==
+==== Command: ==
+  **database datasources !!?which?!!**
+
+==== Argument: ==
+  !!Which!! argument may be !!user!!, !!system!! or !!all!! (the default). It specifies what kind of data sources you want to get.
+
+==== Returns: ==
+  **{{datasource1 driver1} {datasource2 driver2} ... }**
+  
+==== Example: ==
+  foreach {dsn drv} [database datasources user] {
+    puts "User DSN $dsn; Driver $drv"
+  }
+
+=== Listing Drivers ==
+==== Command: ==
+  **database drivers**
+==== Returns: ==
+  **{{driver1 attrList1} {driver2 attrList2} ... }**
+  The command returns a list of drivers and their attributes. Each list of attributes consists of strings like NAME=VALUE, where NAME is an attribute name.
+
+==== Example: ==
+  foreach {drv attrlist} [database drivers] {
+    foreach attr $attrlist {
+        regexp {^([^=]*)=(.*)$} $attr -> name value
+        puts "Attribute $drv.$name = $value"
+    }
+  }

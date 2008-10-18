@@ -1,0 +1,15 @@
+Getting Diagnostic Messages
+==== Command: ==
+  **!!$conn!! lastmessages **
+  **!!$stmtName!! lastmessages **
+Retrieves diagnostic messages for the last operation performed on a ((connect connection)) or a ((statement)) object.
+
+==== Returns: ==
+List of lists of the following structure:
+  * SQL state code (typically 5 characters)
+  * Native error code (an integer)
+  * Message text
+
+Use this command to get non-fatal messages for the latest ((exec execute or run)) operation.
+
+When SnODBC throws an error, lastmessages is usable to get the same information as in the error message in a more structured form.

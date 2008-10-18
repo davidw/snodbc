@@ -1,0 +1,27 @@
+Donations and Contributions
+We rely on voluntary donations to continue the development of SnODBC. There is no obligation to donate even if you include SnODBC into your proprietary software; however, if you want SnODBC to improve, it will be rational to donate.
+
+You may also choose to help us with bug reports, useful feature requests, patches and pre-built binaries of dict and Ffidl extensions for your platform. Ssh access to exotic platforms for compiling and testing the extension will be greatly appreciated.
+
+If you have questions, suggestions, patches etc. write ((support@sw4me.com)).
+
+===== Where to Send Monetary Donations ==
+1. Electronic payment systems:
+  * ((http://www.moneybookers.com Moneybookers)): 
+    * send to anton@sw4me.com
+  * ((http://www.webmoney.ru WebMoney)): 
+    * Z248132460533, R438134332389, ID=783331869870
+  * ((http://www.e-gold.com e-Gold)):
+    * spend to account 1345559
+
+2. Credit card payments via ((http://www.emetrix.com eMetrix)) e-commerce provider. Donation size will be $20*(any number you feel appropriate)
+  * Order form URL: ((http://secure.emetrix.com/order/product.asp?PID=67119710))
+  You will receive a "registration code" that you may ignore, as it is not needed for SnODBC to function properly. 
+
+3. Wire transfer (U.S. Dollars)
+  * Account #: **4230 1810 2000 0917 5277**
+  * Bank name:  **Russian Standard Bank, Moscow**
+  * Swift code: **RSJSRUMM**
+  * Beneficiary: **Anton Kovalenko**
+  * Beneficiary address: **Moscow 125080, Panfilova st. 4/5 kw. 135** 
+

@@ -1,0 +1,12 @@
+Getting SnODBC
+Well, if you're reading this, you've already managed to get it, somehow. Please remember that place; there may be a new version in the future.
+
+Canonical URL for the latest version of this extension will always be ((http://www.sw4me.com/snodbc.kit)). 
+
+You may use ((http://www.equi4.com/sdx.html sdx)) tool to unpack the starkit containing the extension, read and modify its sources and pack it again.
+
+Note, however, that the script files within the starkit are not the original sources that we have written. SnODBC is developed for Tcl 8.5 and uses some new convenient features that Tcl 8.4 lacks. ((http://wiki.tcl.tk/11155 Sugar)) macro processor is used to translate the sources for Tcl 8.4 compatibility. Fortunately, Sugar preserves indentation and comments, and these generated sources are readable and editable; there are only a few places there that are hard to understand.
+
+Complete original sources will be released when Tcl 8.5 is. 
+
+

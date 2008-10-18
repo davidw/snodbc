@@ -1,0 +1,13 @@
+Dependencies and Portability
+The only external dependency of SnODBC is the ODBC driver manager supporting ODBC-3.0 specification. For UNIX, both iodbc and unixodbc are OK.
+
+SnODBC depends on Tcl 8.4 and is compatible with Tcl 8.5. It requires a working implementation of **dict** and **lassign** command. A binary extension implementing **dict** is included into this distribution, and **lassign** command is emulated by tclkit.
+
+This package contains Ffidl 0.6, a library for foreign function calls. It's a binary extension also.
+
+For now, these binary extensions are compiled for Windows and Linux on x86 platform. If you're using another platform, compile them yourself; in this case, we ask you to send us your compiled shared libraries, so we'll include them into this package.
+
+On UNIX platforms the odbc library is expected to be named libodbc.EXT.1, where EXT is the platform's shared library extension. It works on Linux; other platforms may need a patch. The shared library location is specified in **odbc-ffi.tcl**.
+
+You may experience problems on 64-bit platforms, especially if ODBC type definitions are unobvious, e.g. sizeof(SQLHANDLE) != sizeof(void*) or SQLINTEGER is not int. If you'll discover the solution for such problems on your platform, please inform us so we'll fix the package.
+

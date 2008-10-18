@@ -1,0 +1,39 @@
+Statement Objects
+If you use the same SQL query multiple times, it makes sense to create a separate statement object. The statement's query is parsed and precompiled by the database driver, so it may improve performance. The statement object also provide methods for retrieving various metadata for the query.
+
+==== Command: ==
+  ** !!$conn!! statement !!stmtName!! !!sql-clause!! !!?argtypedefs?!! **
+
+==== Arguments: ==
+See ((exec Running Queries)) section for the description of !!sql-clause!! and !!argtypedefs!!.
+
+!!stmtName!! is a name of new command representing the statement object (the command will be created in the current namespace if it's unqualified). 
+
+==== Returns: ==
+Fully-qualified statement object's name.
+
+==== Errors: ==
+The driver usually parses SQL query when the statement is created (but you shouldn't rely on this behavior for unknown drivers). Thus there is a chance that syntaxt errors will be detected at the statement creation time.
+
+==== Command: ==
+  ** !!$stmtName!! run !!?arglist?!! **
+
+This command executes the statement and returns the whole result set, exactly the same way as the **run** method of the connection object.
+
+==== Command: ==
+  ** !!$stmtName!! rowcount **
+
+This command returns a number of rows affected by the last executed INSERT, DELETE or UPDATE statement. Some data sources may return rowcount for SELECT statements, but you shouldn't rely on this behavior for unknown drivers.
+
+==== Command: ==
+  ** !!$stmtName!! lastmessages **
+
+This command returns a ((lastmessages structured list of diagnostic messages)) for the last operation on the statement. The list inside the statement object is cleared as a side-effect, so the next call to lastmessages will return the empty list.
+
+==== Command: ==
+  ** !!$stmtName!! execute **
+  ** !!$stmtName!! fetch **
+  ** !!$stmtName!! moreresults **
+
+See ((fetch Fetching Result Set)) for the detailed description.
+

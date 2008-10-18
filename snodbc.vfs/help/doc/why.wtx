@@ -1,0 +1,7 @@
+Why Use SnODNC?
+The most obvious reason to use SnODBC is a desire to have a high-level, object-oriented interface to the ODBC API. 
+
+There are some other ODBC bindings, such as a well-known TclODBC extension written in C++. However, I don't know of any other high-level extension that supports Unicode data types: for now, this feature is a main reason to prefer SnODBC.
+
+The internal architecture of the extension may matter too, if you are planning to modify it. SnODBC is all in TCL, with two layers inside: low-level binding for ODBC calls and high-level SNIT wrappers around ODBC handles. It's for you to decide whether this architecture is good or bad.
+

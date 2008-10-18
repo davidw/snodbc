@@ -1,0 +1,7 @@
+Passing Rows to a Callback Command
+==== Commands: ==
+  ** !!$conn!! eval !!cmd!! !!sql-clause!! !!?argtypedefs?!! !!?arglist?!! **
+  ** !!$statement!! eval !!cmd!! !!?arglist?!! **
+
+These methods are similar to the **((exec run))** methods of both statement and connection objects. But, instead of returning the whole result set, **eval** method passes each row to the command given as argument. The command is a list containing the procedure name and (possibly) some initial arguments.
+
