@@ -717,6 +717,7 @@ variable ::odbc::ATTRS {
 	variable desc_column_cache
 	if {![info exists desc_column_cache($nth)]} {
 	    set cname [binary format @256]
+
 	    ${apins}::SQLDescribeCol $hstmt $nth \
 		cname 256 \
 		    [LP SQLSMALLINT cnameLen] \
@@ -968,27 +969,20 @@ variable ::odbc::ATTRS {
 	return $result
     }
     method fetch {{arrayName {}} {colNames {}}} {
-	set rc [${apins}::SQLFetch $hstmt]
-	if {$rc==1} {$self Diagnose}
-	if {$rc==-1} {return -code error [$self Diagnose]}
+	set row [cfetch $hstmt $numColumns]
 	if {$arrayName eq ""} {
-	    if {$rc==100} {return ""}
-	    set row [list]
-	    for {set i 1} {$i<=$numColumns} {incr i} {
-		lappend row [$self GetData $i]
-	    }
 	    return $row
 	} else {
 	    upvar 1 $arrayName rowArray
-	    if {$rc==100} {return 0}
-	    for {set i 1} {$i<=$numColumns} {incr i} {
-		set cname [lindex $colNames [expr {$i-1}]]
-		if {$cname eq ""} { lassign [$self DescribeColumn $i] cname }
-		set rowArray($cname) [$self GetData $i]
+	    set i 0
+	    foreach x $row {
+		set cname [lindex $colNames $i]
+		set rowArray($cname) $x
+		incr i
 	    }
-	    return 1
 	}
     }
+
     method scroll {dir {n 0} {arrayName {}} {colNames {}}} {
 	set iDir [dict get {absolute 5 relative 6 
 	    first 2 last 3 next 1 prior 4} $dir]
@@ -1089,31 +1083,8 @@ variable ::odbc::ATTRS {
 	return $value
     }
     method GetData {nth} {
-	if {![info exists gdBuffer]} {
-	    set gdBuffer [binary format @1024]
-	}
-	lassign [$self DescribeColumn $nth] nm tp sc pr nl
-	set c_type [ctype_from_sqltype $tp]
-	set real_max_length [expr {1024-[ctype_termination $c_type]}]
-	set bin ""
-	while 1 {
-	    set rc [${apins}::SQLGetData  $hstmt $nth $c_type gdBuffer 1024 \
-		    [LP SQLINTEGER indicator]]
-	    if {$rc==-1} { return -code error "Couldn't SQLGetData" }
-	    if {$rc==100} { break }
-	    if {$indicator==-1} { return $options(-null) }
-	    set dl [expr {
-		    ($indicator>$real_max_length||$indicator==-4)?
-		    $real_max_length: $indicator}]
-	    append bin [string range $gdBuffer 0 [expr {$dl-1}]]
-	    # real
-	    if {$indicator>=0 && $indicator<=$real_max_length} {break}
-	}
-	switch -exact -- $c_type {
-	    -8 {encoding convertfrom unicode $bin}
-	    -2 {set bin}
-	    1  {encoding convertfrom $options(-encoding) $bin}
-	}
+	set retval [getdata $hstmt $nth]
+	return $retval
     }
     method ResultAsListOrLOL {} {
 	set rows [list]
