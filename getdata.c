@@ -3,8 +3,6 @@
  *
  * This code is released under the same terms as Tcl. */
 
-# include <windows.h>
-
 #include <stdlib.h>
 #include <tcl.h>
 
@@ -38,9 +36,21 @@ static Tcl_Obj *encodingoption = NULL;
 static int
 odbc_tcl_getencoding(Tcl_Interp *interp, Tcl_Encoding *encoding) {
     Tcl_Obj *encodingObj = Tcl_ObjGetVar2(interp, options, encodingoption, 0);
+
+#if TCL_MAJOR_VERSION == 8 && TCL_MINOR_VERSION > 4
     if (Tcl_GetEncodingFromObj(interp, encodingObj, encoding) != TCL_OK) {
 	return TCL_ERROR;
     }
+#else
+    {
+	Tcl_Encoding enc;
+	enc = Tcl_GetEncoding(interp, Tcl_GetString(encodingObj));
+	if (enc == NULL) {
+	    return TCL_ERROR;
+	}
+	*encoding = enc;
+    }
+#endif
     return TCL_OK;
 }
 
@@ -382,12 +392,6 @@ odbc_getdata_cmd(ClientData clientData, Tcl_Interp *interp,
 
 EXTERN int
 Getdata_Init(Tcl_Interp *interp) {
-
-#ifdef USE_TCL_STUBS
-    if (Tcl_InitStubs(interp, "8.4", 0) == NULL) {
-        return TCL_ERROR;
-    }
-#endif
 
     options = Tcl_NewStringObj("options", -1);
     nulloption = Tcl_NewStringObj("-null", -1);
