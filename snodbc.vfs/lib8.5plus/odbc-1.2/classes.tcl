@@ -3,6 +3,7 @@ package provide odbc::obj 1.2
 
 package require odbc::ffi
 package require Ffidlx
+package require getdata
 package require snit
 
 namespace eval ::odbc {}

@@ -3,6 +3,8 @@
  *
  * This code is released under the same terms as Tcl. */
 
+# include <windows.h>
+
 #include <stdlib.h>
 #include <tcl.h>
 
@@ -380,6 +382,12 @@ odbc_getdata_cmd(ClientData clientData, Tcl_Interp *interp,
 
 EXTERN int
 Getdata_Init(Tcl_Interp *interp) {
+
+#ifdef USE_TCL_STUBS
+    if (Tcl_InitStubs(interp, "8.4", 0) == NULL) {
+        return TCL_ERROR;
+    }
+#endif
 
     options = Tcl_NewStringObj("options", -1);
     nulloption = Tcl_NewStringObj("-null", -1);

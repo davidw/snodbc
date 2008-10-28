@@ -114,7 +114,7 @@ proc fetch_n {conn n} {
     puts [time {c execute}]
     for {set i 1} {$i <= $n} {incr i} {
 #	puts $i
-#	puts [time {
+#	puts stderr [time {
 	set record [c fetch]
 #	c fetch
 #	puts "$record"
@@ -126,16 +126,15 @@ proc fetch_n {conn n} {
     puts "Time: [expr $end - $start] seconds"
 }
 
-#puts [odbc::database drivers]
+# tk_messageBox -message [odbc::database drivers]
 
-if { 1 } {
-    load ./libgetdata.so
+if { 0 } {
+    load ./libgetdata[info sharedlibextension]
 }
 
+console show
 
-puts [odbc::database datasources]
-
-set conn [odbc::database pgsqlconn dogru_test "davidw" "hola"]
+set conn [odbc::database pgsqlconn {PostgreSQL35W} "davidw" "hola"]
 
 #make_test_db $conn
 #populate $conn 1 1000000

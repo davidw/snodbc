@@ -8,4 +8,4 @@
 # script is sourced, the variable $dir must contain the
 # full path name of this file's directory.
 
-package ifneeded getdata 0.1 [list load [file join $dir libgetdata.dll]]
+package ifneeded getdata 1.0 [list load [file join $dir libgetdata.dll]]
