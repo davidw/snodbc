@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <tcl.h>
 
-#ifdef __WINDOWS__
+#ifdef __WIN32__
 #include <windows.h>
 #endif
 
