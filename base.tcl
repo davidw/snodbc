@@ -103,14 +103,13 @@ proc fetch_n {conn n} {
 
     set start [clock seconds]
     catch {c drop}
-#    set where "where customer_id = 37677"
     set where ""
     $conn statement c "select customer_id, first_name,
                last_name, credit_limit, email_address, gender,
                income_level, marital_status, score1, score2, score3, score4,
                score5,score6,score7,score8,score9,score10
                from public.testdata $where limit $n"
-    
+
     puts [time {c execute}]
     for {set i 1} {$i <= $n} {incr i} {
 #	puts $i
@@ -126,22 +125,13 @@ proc fetch_n {conn n} {
     puts "Time: [expr $end - $start] seconds"
 }
 
-# tk_messageBox -message [odbc::database drivers]
+if { $tcl_platform(platform) == "windows" } {
+    console show
+}
 
-#if { 0 } {
-#    load ./libgetdata[info sharedlibextension]
-#}
-
-console show
-
-set conn [odbc::database pgsqlconn {PostgreSQL35W} "davidw" "hola"]
+set conn [odbc::database pgsqlconn dogru_test "davidw" "blargh"]
 
 #make_test_db $conn
 #populate $conn 1 1000000
 
 fetch_n $conn 50000
-
-#while { 1 } {
-#    after 1000
-#    puts "end loop"
-#}

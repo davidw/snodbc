@@ -6,7 +6,9 @@
 #include <stdlib.h>
 #include <tcl.h>
 
+#ifdef __WINDOWS__
 #include <windows.h>
+#endif
 
 #define DONT_TD_VOID 1
 #include <sql.h>
