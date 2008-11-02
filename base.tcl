@@ -128,9 +128,9 @@ proc fetch_n {conn n} {
 
 # tk_messageBox -message [odbc::database drivers]
 
-if { 0 } {
-    load ./libgetdata[info sharedlibextension]
-}
+#if { 0 } {
+#    load ./libgetdata[info sharedlibextension]
+#}
 
 console show
 

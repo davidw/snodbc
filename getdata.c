@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <tcl.h>
 
+#include <windows.h>
+
 #define DONT_TD_VOID 1
 #include <sql.h>
 
@@ -392,6 +394,10 @@ odbc_getdata_cmd(ClientData clientData, Tcl_Interp *interp,
 
 EXTERN int
 Getdata_Init(Tcl_Interp *interp) {
+
+    if (Tcl_InitStubs(interp, "8.4", 0) == NULL) {
+        return TCL_ERROR;
+    }
 
     options = Tcl_NewStringObj("options", -1);
     nulloption = Tcl_NewStringObj("-null", -1);

@@ -3,7 +3,7 @@ snodbc.kit: libgetdata.dll snodbc.vfs/lib8.5plus/odbc-1.2/classes.tcl
 	./tclkit-win32.upx.exe sdx.kit wrap snodbc.kit
 
 libgetdata.dll: getdata.c
-	gcc -mno-cygwin -g -O3 -W -DUSE_TCL_STUBS -I"/usr/local/include" -shared -o libgetdata.dll getdata.c "/usr/local/lib/libtclstub85.a" "/usr/lib/w32api/libodbc32.a"
+	gcc -mno-cygwin -g -O3 -W -DUSE_TCL_STUBS -I"/usr/local/include" -shared -o libgetdata.dll getdata.c "/usr/local/lib/libtclstub84.a" "/usr/lib/w32api/libodbc32.a"
 
 clean:
 	find . -name "*~" | xargs rm

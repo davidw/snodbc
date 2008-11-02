@@ -66,7 +66,7 @@ namespace eval ::reftrace {
 }
 namespace eval ::reftrace::v {}
 
-
+package require getdata
 
 # Make a persistent reference to a [sub]list element
 proc ::reftrace::lindex& {listVarName args} {
@@ -1327,18 +1327,18 @@ namespace eval ::odbc {}; proc ::odbc::statement {args} {};  ::::snit::type ::od
 	return $result
     }
     method fetch {{arrayName {}} {colNames {}}} {
-	set row [cfetch $hstmt $numColumns]
-	if {$arrayName eq ""} {
-	    return $row
-	} else {
-	    upvar 1 $arrayName rowArray
-	    set i 0
-	    foreach x $row {
-		set cname [lindex $colNames $i]
-		set rowArray($cname) $x
-		incr i
-	    }
-	}
+        set row [cfetch $hstmt $numColumns]
+        if {$arrayName eq ""} {
+            return $row
+        } else {
+            upvar 1 $arrayName rowArray
+            set i 0
+            foreach x $row {
+                set cname [lindex $colNames $i]
+                set rowArray($cname) $x
+                incr i
+            }
+        }
     }
     method scroll {dir {n 0} {arrayName {}} {colNames {}}} {
 	set iDir [dict get {absolute 5 relative 6 
@@ -1439,8 +1439,8 @@ namespace eval ::odbc {}; proc ::odbc::statement {args} {};  ::::snit::type ::od
 	return $value
     }
     method GetData {nth} {
-	set retval [getdata $hstmt $nth]
-	return $retval
+        set retval [getdata $hstmt $nth]
+        return $retval
     }
     method ResultAsListOrLOL {} {
 	set rows [list]
